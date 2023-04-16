@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request
 import requests, smtplib
+import os
 app = Flask(__name__)
 
 
 response = requests.get("https://api.npoint.io/6a763fd44db522817a35")
 all_posts = response.json()
 
-my_email = "beknazar.ulanbekuuluu@mail.ru"
-password = "DGjDj2QjrUDdxnGDabg3"
+my_email = os.environ.get('EMAIL')
+password = os.environ.get('PASSWORD')
+
 
 @app.route('/')
 def index():
